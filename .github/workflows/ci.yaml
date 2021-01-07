@@ -1,0 +1,16 @@
+name: Manual build
+on: workflow_dispatch
+
+env:
+  IMAGE: git
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker buildx create --use
+
+          docker buildx build --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8 --tag matefarkas/whalebrew-${IMAGE} ${IMAGE}
