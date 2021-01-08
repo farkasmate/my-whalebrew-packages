@@ -14,6 +14,7 @@ LABEL io.whalebrew.config.volumes [ \
   '$SSH_AUTH_SOCK:$SSH_AUTH_SOCK:ro', \
 ]
 LABEL io.whalebrew.config.missing_volumes skip
+LABEL io.whalebrew.required_version >=0.3.0
 
 RUN apk add --no-cache --update \
   git \
